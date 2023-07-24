@@ -5,7 +5,7 @@ import {fragment, vertex} from "./shaders";
 import {createBuffer} from "./bufferUtils";
 import {convert, generateParticles, speedFactor, trailLength, updateParticles} from "./particleUtils";
 import ImageCanvasSource from "ol/source/ImageCanvas";
-import {getSubArray} from "./getSubArray";
+import {getSubArrayMemoized as getSubArray} from "./getSubArray";
 import ImageLayer from "ol/layer/Image";
 
 export const WindLayer = ({vectorsData}) => {
@@ -41,7 +41,6 @@ export const WindLayer = ({vectorsData}) => {
 
                 canvas.width = size[0];
                 canvas.height = size[1];
-
                 gl.viewport(0, 0, canvas.width, canvas.height);
                 const render = () => {
                     const worldProjection = getSubArray(vectorsData, extent, [-180, -90, 180, 90])

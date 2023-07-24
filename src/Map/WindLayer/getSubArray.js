@@ -1,3 +1,6 @@
+import memoizeOne from 'memoize-one';
+import {equals} from 'ol/extent'
+
 export const getSubArray = (worldArray, extent, worldExtent) => {
     const m = worldArray.length;
     const n = worldArray[0].length;
@@ -24,3 +27,10 @@ export const getSubArray = (worldArray, extent, worldExtent) => {
         return  worldArray.slice(iMin, iMax).map(row => row.slice(jMinWrapped, jMaxWrapped));
     }
 }
+
+export const getSubArrayMemoized = memoizeOne(getSubArray, (prevArgs, newArgs) => {
+    const oldExtent = prevArgs[1];
+    const newExtent = newArgs[1];
+
+    return equals(oldExtent, newExtent);
+});

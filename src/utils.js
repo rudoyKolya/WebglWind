@@ -50,11 +50,11 @@ export const initShaderProgram = (gl, vSource, fSource) => {
 
     gl.useProgram(program)
     gl.program = program
-    return true
+    return program
 }
 
-export const getScripts = (ref, fShader, vShader) => {
-    const gl = ref.current.getContext('webgl')
+export const getScripts = (ref, fShader, vShader, context = 'webgl') => {
+    const gl = ref.current.getContext(context)
 
     return {gl, vertexShaderSource: vShader, fragmentShaderSource: fShader, canvas: ref}
 }
