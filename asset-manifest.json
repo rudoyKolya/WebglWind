@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/WebglWind/static/css/main.4f547dcc.chunk.css",
+    "main.css": "/WebglWind/static/css/main.894673a4.chunk.css",
     "main.js": "/WebglWind/static/js/main.7f7903ba.chunk.js",
     "main.js.map": "/WebglWind/static/js/main.7f7903ba.chunk.js.map",
     "runtime-main.js": "/WebglWind/static/js/runtime-main.edfa7858.js",
@@ -8,9 +8,9 @@
     "static/js/2.46277768.chunk.js": "/WebglWind/static/js/2.46277768.chunk.js",
     "static/js/2.46277768.chunk.js.map": "/WebglWind/static/js/2.46277768.chunk.js.map",
     "index.html": "/WebglWind/index.html",
-    "precache-manifest.ad798a53b0cf40795bce6e8b98088fd9.js": "/WebglWind/precache-manifest.ad798a53b0cf40795bce6e8b98088fd9.js",
+    "precache-manifest.95dd709afccc81e4b2e427254a30a1c6.js": "/WebglWind/precache-manifest.95dd709afccc81e4b2e427254a30a1c6.js",
     "service-worker.js": "/WebglWind/service-worker.js",
-    "static/css/main.4f547dcc.chunk.css.map": "/WebglWind/static/css/main.4f547dcc.chunk.css.map",
+    "static/css/main.894673a4.chunk.css.map": "/WebglWind/static/css/main.894673a4.chunk.css.map",
     "static/js/2.46277768.chunk.js.LICENSE.txt": "/WebglWind/static/js/2.46277768.chunk.js.LICENSE.txt",
     "static/media/2016112000.png": "/WebglWind/static/media/2016112000.3a65a12c.png",
     "static/media/2016112106.png": "/WebglWind/static/media/2016112106.d92cb4ab.png",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.edfa7858.js",
     "static/js/2.46277768.chunk.js",
-    "static/css/main.4f547dcc.chunk.css",
+    "static/css/main.894673a4.chunk.css",
     "static/js/main.7f7903ba.chunk.js"
   ]
 }
