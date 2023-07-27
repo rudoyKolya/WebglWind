@@ -2,6 +2,11 @@
     height: 800px;
     width: 100%;
 }
+@media screen and (max-width: 768px) {
+    .ol-map {
+        height: 600px; /* Измените на желаемую высоту для мобильных устройств */
+    }
+}
 
 .ol-control {
     position: absolute;
