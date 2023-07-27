@@ -11,7 +11,7 @@ export const createBufferWithVao = (gl, count, particles) => {
     gl.vertexAttribPointer(0, 1, gl.FLOAT, false, BUFFER_SIZE * 4, 0);
     gl.vertexAttribPointer(1, 1, gl.FLOAT, false, BUFFER_SIZE * 4, 4);
     gl.vertexAttribPointer(2, 1, gl.FLOAT, false, BUFFER_SIZE * 4, 8);
-    gl.vertexAttribPointer(3, 3, gl.FLOAT, false, BUFFER_SIZE * 4, 12);
+    gl.vertexAttribPointer(3, 4, gl.FLOAT, false, BUFFER_SIZE * 4, 12);
     gl.enableVertexAttribArray(0);
     gl.enableVertexAttribArray(1);
     gl.enableVertexAttribArray(2);
@@ -42,23 +42,31 @@ export const createProgram = (gl, vertexShaderSource, fragmentShaderSource, vary
     return program
 }
 
+
+const rearrangeArrayPairs = (arr, index) => {
+    const position = index * 2;
+    return arr.slice(0, position).reverse().concat(arr.slice(position).reverse());
+};
+
 export const draw = (gl, program, buffers, count, state) => {
     gl.useProgram(program)
-    const orderedBuffers = [...buffers.slice(0, state.buffer), ...buffers.slice(state.buffer)]
+    const orderedBuffers = rearrangeArrayPairs(buffers, state.vao - 1)
 
     const position = gl.getAttribLocation(program, 'position')
     const color = gl.getAttribLocation(program, 'color')
+    const opacity = gl.getUniformLocation(program, 'opacity')
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
     gl.enable(gl.BLEND);
     gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE)
     gl.clear(gl.COLOR_BUFFER_BIT);
     for (let i = 0; i < orderedBuffers.length; i += 2) {
-        gl.bindBuffer(gl.ARRAY_BUFFER, orderedBuffers[i])
+        gl.uniform1f(opacity, 1.0)
+        gl.bindBuffer(gl.ARRAY_BUFFER, orderedBuffers[i + 1])
         gl.enableVertexAttribArray(position)
         gl.vertexAttribPointer(position, 2, gl.FLOAT, false, BUFFER_SIZE * 4, 0)
 
         gl.enableVertexAttribArray(color)
-        gl.vertexAttribPointer(color, 3, gl.FLOAT, false, BUFFER_SIZE * 4, 12)
+        gl.vertexAttribPointer(color, 4, gl.FLOAT, false, BUFFER_SIZE * 4, 12)
 
         gl.drawArrays(gl.POINTS, 0, count)
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
@@ -66,17 +74,9 @@ export const draw = (gl, program, buffers, count, state) => {
 
 }
 
-
-export const dataUpdate = (program, gl, state, count, extent, buffers) => {
-    gl.useProgram(program)
-    gl.enable(gl.RASTERIZER_DISCARD);
-    const u_extent = gl.getUniformLocation(program, "u_extent");
-    gl.bindBuffer(gl.TRANSFORM_FEEDBACK_BUFFER, null);
-    const newExtent = [normalizeLongitude(extent[0]) / 180, extent[1] / 90, normalizeLongitude(extent[2]) / 180, extent[3] / 90].map(normalizeValue)
-    gl.bindBuffer(gl.TRANSFORM_FEEDBACK_BUFFER, null);
-    gl.uniform4fv(u_extent, newExtent)
-    gl.bindVertexArray(buffers[state.vao]);
-    gl.bindBufferBase(gl.TRANSFORM_FEEDBACK_BUFFER, 0, buffers[state.buffer]);
+const transformFeedback = (gl, count, buffer, vao) => {
+    gl.bindVertexArray(vao);
+    gl.bindBufferBase(gl.TRANSFORM_FEEDBACK_BUFFER, 0, buffer);
 
     gl.beginTransformFeedback(gl.POINTS);
 
@@ -86,9 +86,25 @@ export const dataUpdate = (program, gl, state, count, extent, buffers) => {
 
     gl.bindVertexArray(null);
     gl.bindBufferBase(gl.TRANSFORM_FEEDBACK_BUFFER, 0, null);
+}
 
-    state.vao = (state.vao + 2) >= buffers.length ? 1 : state.vao + 2;
-    state.buffer = (state.buffer + 2) >= buffers.length ? 0 : state.buffer + 2;
+
+export const dataUpdate = (program, gl, state, count, extent, buffers, initialBuffer) => {
+    gl.useProgram(program)
+    gl.enable(gl.RASTERIZER_DISCARD);
+    const u_extent = gl.getUniformLocation(program, "u_extent");
+    gl.bindBuffer(gl.TRANSFORM_FEEDBACK_BUFFER, null);
+    const newExtent = [normalizeLongitude(extent[0]) / 180, extent[1] / 90, normalizeLongitude(extent[2]) / 180, extent[3] / 90].map(normalizeValue)
+    gl.uniform4fv(u_extent, newExtent)
+    if(state.vao === -1) {
+        transformFeedback(gl, count, buffers[state.buffer], initialBuffer[1])
+        state.vao = 1;
+        state.buffer = 2;
+    } else {
+        transformFeedback(gl, count, buffers[state.buffer], buffers[state.vao])
+        state.vao = (state.vao + 2) >= buffers.length ? 1 : state.vao + 2;
+        state.buffer = (state.buffer + 2) >= buffers.length ? 0 : state.buffer + 2;
+    }
     gl.disable(gl.RASTERIZER_DISCARD);
 }
 

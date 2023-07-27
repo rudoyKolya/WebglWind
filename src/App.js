@@ -1,7 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Map from "./Map";
-import {Layers, TileLayer, VectorLayer} from "./Layers";
-import {fromLonLat, get} from "ol/proj";
+import {Layers} from "./Layers";
+import {fromLonLat} from "ol/proj";
 import {WindLayer} from "./Map/WindLayer/WindLayer";
 import img from '../src/Map/WindLayer/2016112000.png'
 import img2 from '../src/Map/WindLayer/2016112118.png'
@@ -10,7 +10,6 @@ import {loadImageData} from "./Map/WindLayer/loadImageData";
 
 import mapConfig from "./config.json";
 import "./App.css";
-import {Experiment} from "./Experiment";
 import {WindLayerTransformFeedback} from "./Map/WindLayer/WindLayerTransformFeedback/WindLayerTransformFeedback";
 
 
@@ -21,6 +20,7 @@ const App = () => {
     const [version, setVersion] = useState(2)
     const [trailLength, setTrailLength] = useState(20)
     const [speed, setSpeed] = useState(30)
+    const [onlyWhite, setOnlyWhite] = useState(false)
     const [particlesNumber, setParticlesNumber] = useState(20000)
     const [windLayerData, setWindLayerData] = useState(null)
     const [activeImage, setActiveImage] = useState(img)
@@ -35,7 +35,7 @@ const App = () => {
             <Map center={fromLonLat(center)} zoom={zoom}>
                 <Layers>
                     {windLayerData && version === 1 ? <WindLayer vectorsData={windLayerData}/> : null}
-                    {version === 2 && <WindLayerTransformFeedback particlesNumber={particlesNumber} src={activeImage} trailLength={trailLength} speed={speed}/>}
+                    {version === 2 && <WindLayerTransformFeedback particlesNumber={particlesNumber} src={activeImage} trailLength={trailLength} speed={speed} onlyWhite={onlyWhite}/>}
                 </Layers>
             </Map>
             <div>
@@ -77,10 +77,22 @@ const App = () => {
                             type="range"
                             id="Speed"
                             name="Speed"
-                            min={20}
+                            min={1}
                             max={100}
                             value={speed}/>
                         <label htmlFor="Particles number">Speed {speed}</label>
+                    </div>
+                    <div>
+                        <input
+                            onChange={(e) => {
+                                setOnlyWhite(i => !i)
+                            }}
+                            type="checkbox"
+                            id="Only white"
+                            name="Only white"
+                            checked={onlyWhite}
+                        />
+                        <label htmlFor="Only white">Only white {onlyWhite}</label>
                     </div>
 
                 </fieldset>

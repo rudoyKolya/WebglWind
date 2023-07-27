@@ -17,6 +17,7 @@ const generateParticle = () => ([
     0,
     0,
     0,
+    0,
 ])
 export const generateParticles = (count) => {
     const particles = new Float32Array(count * BUFFER_SIZE)
@@ -24,4 +25,11 @@ export const generateParticles = (count) => {
         particles.set([...generateParticle()], i)
     }
     return particles
+}
+
+export const arrayEquals = (a, b) => {
+    return Array.isArray(a) &&
+        Array.isArray(b) &&
+        a.length === b.length &&
+        a.every((val, index) => val === b[index]);
 }

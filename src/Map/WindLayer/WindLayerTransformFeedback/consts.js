@@ -1,1 +1,1 @@
-export const BUFFER_SIZE = 6
+export const BUFFER_SIZE = 7
