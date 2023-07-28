@@ -25,7 +25,7 @@ const App = () => {
     const [windLayerData, setWindLayerData] = useState(null)
     const [activeImage, setActiveImage] = useState(img)
 
-    const [color, setColor] = useColor('hex', 'rgb(20, 20,20)');
+    const [color, setColor] = useColor('hex', 'rgb(255, 255, 255)');
 
     useEffect(() => {
         loadImageData(activeImage, (data) => {
