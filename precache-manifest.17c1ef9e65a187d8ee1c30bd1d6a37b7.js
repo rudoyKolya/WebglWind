@@ -1,23 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bfcac9e4d6adc61f7387c6d84c0cd013",
+    "revision": "bc5675b9b21b5e2ee9dae93a784b8ff4",
     "url": "/WebglWind/index.html"
   },
   {
-    "revision": "b2a475c3488d1a87fc15",
+    "revision": "912b25b995bd935ca71d",
+    "url": "/WebglWind/static/css/2.0cf85620.chunk.css"
+  },
+  {
+    "revision": "32a23e35c2c289d0d634",
     "url": "/WebglWind/static/css/main.894673a4.chunk.css"
   },
   {
-    "revision": "8f2074b69fcdf2ec5a7d",
-    "url": "/WebglWind/static/js/2.46277768.chunk.js"
+    "revision": "912b25b995bd935ca71d",
+    "url": "/WebglWind/static/js/2.88a93cd1.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/WebglWind/static/js/2.46277768.chunk.js.LICENSE.txt"
+    "url": "/WebglWind/static/js/2.88a93cd1.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b2a475c3488d1a87fc15",
-    "url": "/WebglWind/static/js/main.7f7903ba.chunk.js"
+    "revision": "32a23e35c2c289d0d634",
+    "url": "/WebglWind/static/js/main.e8c7e18d.chunk.js"
   },
   {
     "revision": "348e2f60e6b9e7ed65c6",
