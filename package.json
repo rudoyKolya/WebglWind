@@ -10,6 +10,7 @@
     "memoize-one": "^6.0.0",
     "ol": "^7.4.0",
     "react": "^16.13.1",
+    "react-color-palette": "^6.2.0",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
     "webpack-glsl-loader": "^1.0.1"

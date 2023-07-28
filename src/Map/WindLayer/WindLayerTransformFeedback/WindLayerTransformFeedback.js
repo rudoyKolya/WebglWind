@@ -7,7 +7,7 @@ import {generateParticles, arrayEquals} from "./utils";
 import {draw, dataUpdate, createProgram, createBufferWithVao, loadImageData} from "./webglUtils";
 import {BUFFER_SIZE} from "./consts";
 
-export const WindLayerTransformFeedback = memo(({src, trailLength, particlesNumber, speed, onlyWhite}) => {
+export const WindLayerTransformFeedback = memo(({src, trailLength, particlesNumber, speed, withColor, color}) => {
     const canvas = useRef(document.createElement("canvas")).current
     const [particles, setParticles] = useState(generateParticles(particlesNumber))
     const [ext, setExt] = useState([0, 0, 0, 0])
@@ -18,8 +18,11 @@ export const WindLayerTransformFeedback = memo(({src, trailLength, particlesNumb
     const layerRef = useRef(null)
     useEffect(() => {
         gl.useProgram(drawProgram)
-        gl.uniform1f(gl.getUniformLocation(drawProgram, 'u_onlyWhite'), onlyWhite ? 1: 0);
-    }, [onlyWhite])
+        gl.uniform1f(gl.getUniformLocation(drawProgram, 'u_withColor'), withColor ? 1: 0);
+        if(withColor) {
+            gl.uniform3fv(gl.getUniformLocation(drawProgram, 'u_color'), [color.rgb.r, color.rgb.g, color.rgb.b].map(i => i / 256));
+        }
+    }, [withColor, color])
 
     useEffect(() => {
         gl.useProgram(programFeedback)
@@ -35,10 +38,6 @@ export const WindLayerTransformFeedback = memo(({src, trailLength, particlesNumb
         const initialBuffer = createBufferWithVao(gl, particlesNumber, particles)
         const buffers = new Array(trailLength).fill(-1).map(() => createBufferWithVao(gl, particlesNumber)).flatMap(i => i)
         gl.bindVertexArray(null);
-        gl.useProgram(drawProgram)
-        gl.uniform1f(gl.getUniformLocation(drawProgram, 'u_onlyWhite'), onlyWhite ? 1: 0);
-        gl.useProgram(programFeedback)
-        gl.uniform1f(gl.getUniformLocation(programFeedback, 'u_speed'), speed / 10000);
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
         const state = {
             vao: -1,

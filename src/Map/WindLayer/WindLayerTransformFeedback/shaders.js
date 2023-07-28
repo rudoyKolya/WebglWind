@@ -84,10 +84,11 @@ precision mediump float;
 out vec4 color;
 in vec4 vColor;
 uniform float opacity;
-uniform float u_onlyWhite;
+uniform float u_withColor;
+uniform vec3 u_color;
 void main() {
-  if(u_onlyWhite > 0.5) {
-    color = vec4(1.0, 1.0, 1.0, opacity);
+  if(u_withColor > 0.5) {
+    color = vec4(u_color, opacity);
   } else {
     color = vec4(vColor.r, vColor.g, vColor.b, opacity);
   }
