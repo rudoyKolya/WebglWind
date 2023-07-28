@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/WebglWind/static/css/main.894673a4.chunk.css",
-    "main.js": "/WebglWind/static/js/main.e8c7e18d.chunk.js",
-    "main.js.map": "/WebglWind/static/js/main.e8c7e18d.chunk.js.map",
+    "main.js": "/WebglWind/static/js/main.5370f9c0.chunk.js",
+    "main.js.map": "/WebglWind/static/js/main.5370f9c0.chunk.js.map",
     "runtime-main.js": "/WebglWind/static/js/runtime-main.edfa7858.js",
     "runtime-main.js.map": "/WebglWind/static/js/runtime-main.edfa7858.js.map",
     "static/css/2.0cf85620.chunk.css": "/WebglWind/static/css/2.0cf85620.chunk.css",
     "static/js/2.88a93cd1.chunk.js": "/WebglWind/static/js/2.88a93cd1.chunk.js",
     "static/js/2.88a93cd1.chunk.js.map": "/WebglWind/static/js/2.88a93cd1.chunk.js.map",
     "index.html": "/WebglWind/index.html",
-    "precache-manifest.17c1ef9e65a187d8ee1c30bd1d6a37b7.js": "/WebglWind/precache-manifest.17c1ef9e65a187d8ee1c30bd1d6a37b7.js",
+    "precache-manifest.c92f0f8b414bdc8c1f33c0d26dc62ba9.js": "/WebglWind/precache-manifest.c92f0f8b414bdc8c1f33c0d26dc62ba9.js",
     "service-worker.js": "/WebglWind/service-worker.js",
     "static/css/2.0cf85620.chunk.css.map": "/WebglWind/static/css/2.0cf85620.chunk.css.map",
     "static/css/main.894673a4.chunk.css.map": "/WebglWind/static/css/main.894673a4.chunk.css.map",
@@ -23,6 +23,6 @@
     "static/css/2.0cf85620.chunk.css",
     "static/js/2.88a93cd1.chunk.js",
     "static/css/main.894673a4.chunk.css",
-    "static/js/main.e8c7e18d.chunk.js"
+    "static/js/main.5370f9c0.chunk.js"
   ]
 }
