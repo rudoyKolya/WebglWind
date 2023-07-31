@@ -105,7 +105,7 @@ const App = () => {
                         />
                         <label htmlFor="Only white">Custom color {customColor ? 'on' : 'off'}</label>
                         {customColor &&
-                            <ColorPicker width={600} height={300} color={color} onChange={setColor} hideHSV dark/>
+                            <ColorPicker width={300} height={300} color={color} onChange={setColor} hideHSV dark/>
                         }
 
                     </div>
